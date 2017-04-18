@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="getLib">
   <head>
     <meta charset="utf-8">
     <title> Angular JS Exam project</title>
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js'></script>
-    <script src='js/app.module.js'></script>
-    <script src='js/app.config.js'></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
-  <body ng-app="musLib">
+  <body>
     <h1>Album List</h1>
-    <div>
+    <div ng-controller="musicController">
     </div>
+
+    <!-- Aangular Material load from CDN -->
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
+   <!-- Angular Application Scripts Load  -->
+   <script src="app.js"></script>
+  <script src="angular/controller.js"></script>
   </body>
   </html>
