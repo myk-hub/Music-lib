@@ -1,0 +1,1 @@
+You will notice that none of the albums has a logo set. Your CRUD must allow the user to set a logo URL for each album, and this logo should be visible along with the album information (on the screen). Our services are ready to receive a parameter logoUrl so all you have to do is using the current REST services to update the albums.
