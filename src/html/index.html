@@ -16,6 +16,7 @@
     <h1>Album list</h1>
 
     <div ng-controller = "musicController">
+      <h2>Count: {{count}}</h2>
       <table class="table table-striped">
             <thead>
               <tr>
@@ -66,13 +67,13 @@
                </div>
                <div class="modal-body">
                  <form name="frmAlbum" class="form-horizontal" novalidate="">
-                   <div class="form-group">
+                   <!-- <div class="form-group">
                      <label class="col-sm-3 control-label">ID</label>
                      <div class="col-sm-9">
                        <input type="text" class="form-control" id="id" name="id" placeholder="id" value="{{id}}" ng-model="album.id"  ng-required="false">
                        <span ng-show="frmAlbum.id.$invalid && frmAlbum.id.$touched">Id field is required</span>
                      </div>
-                   </div>
+                   </div> -->
                  <div class="form-group">
                    <label class="col-sm-3 control-label">Title</label>
                    <div class="col-sm-9">
@@ -140,6 +141,7 @@
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.11.1/validate.min.js"></script>
    <!-- Angular Application Scripts Load  -->
    <script src="app.js"></script>
   <script src="angular/controller.js"></script>

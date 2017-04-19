@@ -1,6 +1,12 @@
 app.controller('musicController', function($scope, $http, API_URL){
   $http.get(API_URL + "all").success(function(response){
      $scope.albums = response;
+//count
+$http.get(API_URL + 'count').success(function(response){
+  var count = response;
+  $scope.count = response['value'];
+})
+
 
 // show modal form
 $scope.toggle = function(modalstate, id){
@@ -12,9 +18,9 @@ $scope.toggle = function(modalstate, id){
     case 'edit':
       $scope.form_title = "Contact Detail";
       $scope.id = id;
-      $http.get(API_URL + 'update/' + id).success(function(response){
+      $http.get(API_URL + 'get/' + id).success(function(response){
         console.log(response);
-        $scope.contact = response;
+        $scope.album = response;
       });
       break;
     default:
@@ -25,15 +31,15 @@ $scope.toggle = function(modalstate, id){
 }
 // save and update record
 $scope.save = function(modalstate, id){
-  var url = API_URL + "add";
+  var url = API_URL + 'add';
   if (modalstate === 'edit') {
-    url += "/" + id;
+    url = API_URL + "update/" + id;
   }
   $http({
     method: 'POST',
     url: url,
-    data: $.param($scope.albums),
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    data: $scope.album,
+    headers: {'Content-Type': 'application/json'}
   }).success(function(response){
     console.log(response);
     location.reload();
@@ -62,7 +68,5 @@ $scope.confirmDelete = function(id){
   }
 }
 
-
-
 });
-} );
+});
