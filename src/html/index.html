@@ -8,19 +8,32 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Josefin+Sans" />
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <div class="container">
-    <h1>Album list</h1>
+    <div ng-controller = "musicController" >
 
-    <div ng-controller = "musicController">
-      <h2>Count: {{count}}</h2>
-      <table class="table table-striped">
+      <br>
+      <div class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand">
+              <img alt="Brand" src="https://cdn1.iconfinder.com/data/icons/google_jfk_icons_by_carlosjj/512/music.png" width="23px" height="23px"></img>
+            </a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a>music library</a></li>
+            <li> <a class="">{{ count }} albums here</a></li>
+          </ul>
+        </div>
+      </div>
+      <table class="table table-striped ">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Logo</th>
+                <!-- <th>ID</th> -->
                 <th>Title</th>
                 <th>Artist</th>
                 <th>Country</th>
@@ -28,13 +41,17 @@
                 <th>Price</th>
                 <th>Year</th>
                 <th>
-                  <button id="btn-add" class="btn btn-success btn-xs" ng-click="toggle('add', 0)">Add New Record</button>
+                  <button id="btn-add"
+                    class="btn btn-success btn-xs "
+                    ng-click="toggle('add', 0)"><span class='glyphicon glyphicon-plus'></span> Add
+                  </button>
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="album in albums">
-                <td>{{ album.id }}</td>
+                <td>{{ album.logoUrl }}</td>
+                <!-- <td>{{ album.id }}</td> -->
                 <td>{{ album.title }}</td>
                 <td>{{ album.artist }}</td>
                 <td>{{ album.country }}</td>
@@ -42,93 +59,150 @@
                 <td>{{ album.price }}</td>
                 <td>{{ album.year }}</td>
                 <td>
+                  <div class='btn-group'>
                   <button class="btn btn-warning btn-xs btn-detail" ng-click="toggle('edit', album.id)">
                     <span class="glyphicon glyphicon-edit"></span>
                   </button>
                   <button class="btn btn-danger btn-xs btn-delete" ng-click="confirmDelete(album.id)">
                     <span class="glyphicon glyphicon-trash"></span>
                   </button>
+                </div>
                 </td>
               </tr>
             </tbody>
           </table>
 
-
           <!--show modal-->
-
          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
            <div class="modal-dialog">
              <div class="modal-content">
                <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                 <span aria-hidden="true">Г—</span>
+                 <span aria-hidden="true" class='glyphicon glyphicon-remove'></span>
                </button>
                <h4 class="modal-title" id="myModalLabel">{{form_title}}</h4>
                </div>
                <div class="modal-body">
                  <form name="frmAlbum" class="form-horizontal" novalidate="">
-                   <!-- <div class="form-group">
-                     <label class="col-sm-3 control-label">ID</label>
-                     <div class="col-sm-9">
-                       <input type="text" class="form-control" id="id" name="id" placeholder="id" value="{{id}}" ng-model="album.id"  ng-required="false">
-                       <span ng-show="frmAlbum.id.$invalid && frmAlbum.id.$touched">Id field is required</span>
-                     </div>
-                   </div> -->
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Logo</label>
+                    <div class="col-sm-9">
+                      <input type="file"
+                             class="form-control"
+                             id="logoUrl"
+                             name="logoUrl"
+                             placeholder="Logo"
+                             value="{{logoUrl}}"
+                             ng-model="album.logoUrl"
+                             ng-required="true"
+                             ngf-select ng-model="logoUrl"
+                             name="logoUrl"
+                             ngf-pattern="'image/*'"
+                             ngf-accept="'image/*'"
+                             ngf-max-size="20MB"
+                             ngf-min-height="100"
+                             ngf-resize="{width: 100, height: 100}">
+                      <span ng-show="frmAlbum.logoUrl.$invalid && frmAlbum.logoUrl.$touched">Logo field is required</span>
+                    </div>
+                  </div>
                  <div class="form-group">
                    <label class="col-sm-3 control-label">Title</label>
                    <div class="col-sm-9">
-                     <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{title}}" ng-model="album.title"  ng-required="true">
+                     <input type="text"
+                            class="form-control"
+                            id="title"
+                            name="title"
+                            placeholder="Title"
+                            value="{{title}}"
+                            ng-model="album.title"
+                            ng-required="true">
                      <span ng-show="frmAlbum.title.$invalid && frmAlbum.title.$touched">Title field is required</span>
                    </div>
                  </div>
                  <div class="form-group">
                    <label class="col-sm-3 control-label">Artist</label>
                    <div class="col-sm-9">
-                     <input type="text" class="form-control" id="artist" name="artist" placeholder="Artist" value="{{artist}}" ng-model="album.artist"  ng-required="true">
+                     <input type="text"
+                            class="form-control"
+                            id="artist"
+                            name="artist"
+                            placeholder="Artist"
+                            value="{{artist}}"
+                            ng-model="album.artist"
+                            ng-required="true">
                      <span ng-show="frmAlbum.artist.$invalid && frmAlbum.artist.$touched">Artist field is required</span>
                    </div>
                  </div>
                  <div class="form-group">
                    <label class="col-sm-3 control-label">Country</label>
                    <div class="col-sm-9">
-                     <input type="text" class="form-control" id="country" name="country" placeholder="Country" value="{{country}}" ng-model="album.country"  ng-required="true">
+                     <input type="text"
+                            class="form-control"
+                            id="country"
+                            name="country"
+                            placeholder="Country"
+                            value="{{country}}"
+                            ng-model="album.country"
+                            ng-required="true">
                      <span ng-show="frmAlbum.country.$invalid && frmAlbum.country.$touched">Country field is required</span>
                    </div>
                  </div>
                  <div class="form-group">
                    <label class="col-sm-3 control-label">Company</label>
                    <div class="col-sm-9">
-                     <input type="text" class="form-control" id="company" name="company"  placeholder="Company" value="{{company}}" ng-model="album.company" ng-required="true">
+                     <input type="text"
+                            class="form-control"
+                            id="company"
+                            name="company"
+                            placeholder="Company"
+                            value="{{company}}"
+                            ng-model="album.company"
+                            ng-required="true">
                      <span ng-show="frmAlbum.company.$invalid && frmAlbum.company.$touched">Company field is required</span>
                    </div>
                  </div>
                  <div class="form-group">
                    <label class="col-sm-3 control-label">Price</label>
                    <div class="col-sm-9">
-                     <input type="text" class="form-control" id="price" name="price" placeholder="Price" value="{{price}}" ng-model="album.price"  ng-required="true">
+                     <input type="text"
+                            class="form-control"
+                            id="price"
+                            name="price"
+                            placeholder="Price"
+                            value="{{price}}"
+                            ng-model="album.price"
+                            ng-required="true">
                      <span ng-show="frmAlbum.price.$invalid && frmAlbum.price.$touched">Price field is required</span>
                    </div>
                  </div>
                  <div class="form-group">
                    <label class="col-sm-3 control-label">Year</label>
                    <div class="col-sm-9">
-                     <input type="text" class="form-control" id="year" name="year" placeholder="Year" value="{{year}}" ng-model="album.year"  ng-required="true">
+                     <input type="text"
+                            class="form-control"
+                            id="year"
+                            name="year"
+                            placeholder="Year"
+                            value="{{year}}"
+                            ng-model="album.year"
+                            ng-required="true">
                      <span ng-show="frmAlbum.year.$invalid && frmAlbum.year.$touched">Year field is required</span>
                    </div>
                  </div>
-
-
                </form>
                </div>
+
                <div class="modal-footer">
-               <button type="button" class="btn btn-primary" id="btn-save" ng-click="save(modalstate, id)" ng-disabled="frmContact.$invalid">Save Changes</button>
+               <button type="button"
+                       id="btn-save"
+                       class="btn btn-primary"
+                       ng-click="save(modalstate, id)"
+                       ng-disabled="frmContact.$invalid">Save Changes
+               </button>
              </div>
-
-
              </div>
            </div>
          </div>
-
         </div>
     </div>
 
@@ -136,15 +210,15 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
    <!-- Include all compiled plugins (below), or include individual files as needed -->
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
    <!-- Aangular Material load from CDN -->
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngMask/3.1.1/ngMask.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.js"></script>
    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.11.1/validate.min.js"></script>
    <!-- Angular Application Scripts Load  -->
    <script src="app.js"></script>
-  <script src="angular/controller.js"></script>
+   <script src="angular/controller.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,29 @@
+a {
+    font-family: "Josefin Sans";
+    font-size: 22px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 100;
+    line-height: 26.4px;
+}
+
+th, label {
+    font-family: "Josefin Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+td, input, p {
+    font-family: "Josefin Sans";
+    font-size: 17px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+button {
+  font-family: arial;
+}
